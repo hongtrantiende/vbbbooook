@@ -78,3 +78,14 @@
 - Patch class `js3.smali` trong constructor để gán cứng `const/4 p7, 0x1` trước khi ghi vào trường `this->g:Z` (`mergeIntoSingleFile`), ép luôn luôn gộp các chương sách thành một file duy nhất.
 - Khi cài đặt bản vá mới lên Android, nếu signature khác hoặc cache lưu trạng thái cũ, cần gỡ cài đặt (uninstall) hoàn toàn app cũ trên điện thoại trước khi cài lại file APK mới.
 **Action:** Đã chỉnh sửa `f91.smali`, `js3.smali`, rebuild APK thành công và bàn giao cho người dùng.
+
+---
+
+### [2026-06-08] ANDROID OS 🔴 Critical — Lỗi ActivityNotFoundException khi gọi Intent CREATE_DOCUMENT trên máy Xiaomi/POCO đã debloat
+
+**Context:** Chức năng xuất file của ứng dụng gọi Intent hệ thống `android.intent.action.CREATE_DOCUMENT` để mở bảng chọn thư mục lưu file (Storage Access Framework).
+**Problem:** Người dùng bấm nút xuất file nhưng không có phản hồi. Kiểm tra logcat thấy lỗi: `Error: Activity not started, unable to resolve Intent { act=android.intent.action.CREATE_DOCUMENT typ=text/plain ... }`. Điều này xảy ra do thiết bị của người dùng (thường là Xiaomi/POCO) đã bị gỡ hoặc vô hiệu hóa ứng dụng hệ thống quản lý tệp tin mặc định (`com.google.android.documentsui`).
+**Solution/Lesson:**
+- Vấn đề nằm ngoài tầm kiểm soát của ứng dụng (không liên quan đến code smali). Không thể fix bằng cách sửa code app vì hệ điều hành không có activity nào để hứng intent này.
+- Cách xử lý duy nhất là cài đặt/bật lại ứng dụng `DocumentsUI` trên thiết bị thông qua lệnh ADB: `cmd package install-existing --user 0 com.google.android.documentsui`.
+**Action:** Đã chạy lệnh khôi phục package `documentsui` cho `User 0` qua ADB, giúp tính năng xuất file hoạt động trở lại bình thường.

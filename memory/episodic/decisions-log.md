@@ -89,3 +89,26 @@ Chọn **phương án 3**. Cấu hình thư mục `tools/` lưu trữ các `.jar
 - ✅ Môi trường dự án cô lập, dễ tái tạo (reproducible) trên mọi máy tính.
 - ✅ Tránh push rác hệ thống (.jar lớn, hàng ngàn file từ apk) lên Git.
 - ⚠️ Cần tải lại công cụ nếu project được clone sang máy mới (có thể viết script khởi tạo sau).
+
+---
+
+### ADR-004: Sử dụng JADX để xuất dự án Gradle thay vì Apktool Smali
+
+**Date:** 2026-06-08
+**Status:** Accepted
+
+**Context:** 
+Quá trình rebuild APK bằng Apktool gặp lỗi AAPT2 do app sử dụng tài nguyên Jetpack Glance phức tạp. Hơn nữa, người dùng có nguyện vọng khôi phục toàn bộ mã nguồn về dạng Java để dễ đọc, chỉnh sửa và quản lý vòng đời ứng dụng trực tiếp trên Android Studio thay vì chỉnh sửa thủ công Smali (hợp ngữ).
+
+**Options Considered:**
+1. **Dịch ngược bằng Apktool (Không giải nén Resource)** — Giữ nguyên resource, chỉ sửa Smali. Nhược điểm: Không sửa được giao diện XML, code khó đọc.
+2. **Dịch ngược bằng JADX-GUI** — Chỉ xem code, không trích xuất dự án tốt.
+3. **Dịch ngược bằng JADX CLI (`--export-gradle`)** — Xuất toàn bộ code ra Java và tài nguyên, tự động tạo cấu trúc `build.gradle` để mở bằng Android Studio.
+
+**Decision:**
+Chọn **phương án 3**. Sử dụng JADX để bóc tách APK ra thư mục `vBook_AndroidStudio/` dưới dạng dự án Gradle thuần túy. Tạo hướng dẫn `skills/apk-tools/JADX_SKILL.md` để hướng dẫn người dùng cách import vào IDE và xử lý lỗi.
+
+**Consequences:**
+- ✅ Dễ đọc code Java, xem được kiến trúc tổng thể, dễ tìm kiếm.
+- ✅ Có thể lợi dụng Android Studio để index, refactor và trace bug.
+- ⚠️ JADX không hoàn hảo, mã Java sinh ra chắc chắn có hàng loạt lỗi cú pháp. Người dùng phải dành thời gian đáng kể để fix code trước khi có thể build thành công.

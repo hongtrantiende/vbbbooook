@@ -42,6 +42,7 @@ build/
 *_decompiled/
 /dist-apk/
 /out-apk/
+vBook_AndroidStudio/
 
 # Local Tools
 /tools/

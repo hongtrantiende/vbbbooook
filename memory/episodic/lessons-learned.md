@@ -20,6 +20,17 @@
 
 ## Entries
 
+### [2026-06-08] GIT 🟡 Important — Khắc phục lỗi RPC failed (Connection reset) khi push repo lớn chứa mã nguồn JADX lên GitHub
+
+**Context:** Sau khi dịch ngược mã nguồn bằng JADX, thư mục `jadx_temp/` chứa hàng chục ngàn file mã nguồn Java nhỏ được đưa vào git track.
+**Problem:** Khi push toàn bộ dự án lên GitHub qua giao thức HTTPS, kết nối bị lỗi reset: `error: RPC failed; curl 55 Send failure: Connection was reset` hoặc `unexpected disconnect`.
+**Solution/Lesson:**
+- Tăng cấu hình bộ nhớ đệm HTTP postBuffer của Git lên mức cao hơn (ví dụ 1.5GB) để tránh bị ngắt kết nối giữa chừng khi upload lượng dữ liệu lớn.
+- Lệnh khắc phục: `git config http.postBuffer 1572864000` (ở phạm vi local hoặc global).
+**Action:** Đã cấu hình lại postBuffer cho repository cục bộ và push thành công lên GitHub repo `https://github.com/hongtrantiende/vbbbooook`.
+
+---
+
 ### [2026-06-08] APK TOOL 🟡 Important — Khắc phục lỗi tương thích tài nguyên khi Decompile/Rebuild APK bằng Apktool
 
 **Context:** Khi chạy dịch ngược (decompile) một số ứng dụng Android đời mới sử dụng Android App Bundles hoặc tài nguyên phức tạp, quá trình rebuild thường gặp lỗi tài nguyên hoặc lỗi biên dịch Smali.

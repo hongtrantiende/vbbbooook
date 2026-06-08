@@ -1,0 +1,15 @@
+package defpackage;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* renamed from: yic  reason: default package */
+/* loaded from: classes.dex */
+public final class yic {
+    public final j62 a;
+    public final long b;
+    public final long c;
+
+    public yic(j62 j62Var, long j, long j2) {
+        this.a = j62Var;
+        this.b = j;
+        this.c = j2;
+    }
+}

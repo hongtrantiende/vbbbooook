@@ -1,0 +1,195 @@
+.class public final Led2;
+.super Lvo8;
+.source "r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50"
+
+
+# instance fields
+.field public final b:I
+
+.field public final c:I
+
+.field public final synthetic d:Ltc2;
+
+
+# direct methods
+.method public constructor <init>(Ltc2;ILyc2;)V
+    .locals 0
+
+    .line 1
+    iput-object p1, p0, Led2;->d:Ltc2;
+
+    .line 2
+    .line 3
+    invoke-direct {p0, p3}, Lvo8;-><init>(Lkotlin/jvm/functions/Function1;)V
+
+    .line 4
+    .line 5
+    .line 6
+    const/4 p1, 0x1
+
+    .line 7
+    iput p1, p0, Led2;->b:I
+
+    .line 8
+    .line 9
+    iput p2, p0, Led2;->c:I
+
+    .line 10
+    .line 11
+    return-void
+.end method
+
+
+# virtual methods
+.method public final a(Llb4;)V
+    .locals 1
+
+    .line 1
+    iget-object p0, p0, Led2;->d:Ltc2;
+
+    .line 2
+    .line 3
+    iget-object p0, p0, Lz3d;->a:Ljava/lang/Object;
+
+    .line 4
+    .line 5
+    check-cast p0, Llm;
+
+    .line 6
+    .line 7
+    const-string v0, "DbBook"
+
+    .line 8
+    .line 9
+    filled-new-array {v0}, [Ljava/lang/String;
+
+    .line 10
+    .line 11
+    .line 12
+    move-result-object v0
+
+    .line 13
+    invoke-virtual {p0, v0, p1}, Llm;->p([Ljava/lang/String;Llb4;)V
+
+    .line 14
+    .line 15
+    .line 16
+    return-void
+.end method
+
+.method public final b(Lkotlin/jvm/functions/Function1;)Lzo8;
+    .locals 8
+
+    .line 1
+    iget-object v0, p0, Led2;->d:Ltc2;
+
+    .line 2
+    .line 3
+    iget-object v1, v0, Lz3d;->a:Ljava/lang/Object;
+
+    .line 4
+    .line 5
+    move-object v2, v1
+
+    .line 6
+    check-cast v2, Llm;
+
+    .line 7
+    .line 8
+    const v1, 0x96023a4
+
+    .line 9
+    .line 10
+    .line 11
+    invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    .line 12
+    .line 13
+    .line 14
+    move-result-object v3
+
+    .line 15
+    new-instance v7, Lcd2;
+
+    .line 16
+    .line 17
+    const/4 v1, 0x1
+
+    .line 18
+    invoke-direct {v7, v1, v0, p0}, Lcd2;-><init>(ILjava/lang/Object;Ljava/lang/Object;)V
+
+    .line 19
+    .line 20
+    .line 21
+    const-string v4, "SELECT COUNT(*) FROM DbBook WHERE location = ? AND type = ? AND hidden = 0"
+
+    .line 22
+    .line 23
+    const/4 v6, 0x2
+
+    .line 24
+    move-object v5, p1
+
+    .line 25
+    invoke-virtual/range {v2 .. v7}, Llm;->H(Ljava/lang/Integer;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILkotlin/jvm/functions/Function1;)Lzo8;
+
+    .line 26
+    .line 27
+    .line 28
+    move-result-object p0
+
+    .line 29
+    return-object p0
+.end method
+
+.method public final f(Llb4;)V
+    .locals 1
+
+    .line 1
+    invoke-virtual {p1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    .line 2
+    .line 3
+    .line 4
+    iget-object p0, p0, Led2;->d:Ltc2;
+
+    .line 5
+    .line 6
+    iget-object p0, p0, Lz3d;->a:Ljava/lang/Object;
+
+    .line 7
+    .line 8
+    check-cast p0, Llm;
+
+    .line 9
+    .line 10
+    const-string v0, "DbBook"
+
+    .line 11
+    .line 12
+    filled-new-array {v0}, [Ljava/lang/String;
+
+    .line 13
+    .line 14
+    .line 15
+    move-result-object v0
+
+    .line 16
+    invoke-virtual {p0, v0, p1}, Llm;->T([Ljava/lang/String;Llb4;)V
+
+    .line 17
+    .line 18
+    .line 19
+    return-void
+.end method
+
+.method public final toString()Ljava/lang/String;
+    .locals 0
+
+    .line 1
+    const-string p0, "DbBook.sq:countInLocationByType"
+
+    .line 2
+    .line 3
+    return-object p0
+.end method

@@ -1,0 +1,92 @@
+.class public Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiLabelImpl;
+.super Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiElementImpl;
+.source "r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50"
+
+# interfaces
+.implements Lzwb;
+
+
+# instance fields
+.field private text:Ljava/lang/String;
+
+
+# direct methods
+.method public constructor <init>(Ljava/lang/String;ZLjava/lang/String;)V
+    .locals 0
+
+    .line 1
+    invoke-direct {p0, p1, p2}, Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiElementImpl;-><init>(Ljava/lang/String;Z)V
+
+    .line 2
+    .line 3
+    .line 4
+    iput-object p3, p0, Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiLabelImpl;->text:Ljava/lang/String;
+
+    .line 5
+    .line 6
+    return-void
+.end method
+
+.method public static createFromJavaScriptMessage(Lcom/google/ads/interactivemedia/v3/impl/data/customui/JavaScriptUiLabelData;)Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiLabelImpl;
+    .locals 3
+
+    .line 1
+    new-instance v0, Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiLabelImpl;
+
+    .line 2
+    .line 3
+    invoke-virtual {p0}, Lcom/google/ads/interactivemedia/v3/impl/data/customui/JavaScriptUiLabelData;->id()Ljava/lang/String;
+
+    .line 4
+    .line 5
+    .line 6
+    move-result-object v1
+
+    .line 7
+    invoke-virtual {p0}, Lcom/google/ads/interactivemedia/v3/impl/data/customui/JavaScriptUiLabelData;->required()Z
+
+    .line 8
+    .line 9
+    .line 10
+    move-result v2
+
+    .line 11
+    invoke-virtual {p0}, Lcom/google/ads/interactivemedia/v3/impl/data/customui/JavaScriptUiLabelData;->text()Ljava/lang/String;
+
+    .line 12
+    .line 13
+    .line 14
+    move-result-object p0
+
+    .line 15
+    invoke-direct {v0, v1, v2, p0}, Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiLabelImpl;-><init>(Ljava/lang/String;ZLjava/lang/String;)V
+
+    .line 16
+    .line 17
+    .line 18
+    return-object v0
+.end method
+
+
+# virtual methods
+.method public getText()Ljava/lang/String;
+    .locals 0
+
+    .line 1
+    iget-object p0, p0, Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiLabelImpl;->text:Ljava/lang/String;
+
+    .line 2
+    .line 3
+    return-object p0
+.end method
+
+.method public setText(Ljava/lang/String;)V
+    .locals 0
+
+    .line 1
+    iput-object p1, p0, Lcom/google/ads/interactivemedia/v3/impl/data/customui/UiLabelImpl;->text:Ljava/lang/String;
+
+    .line 2
+    .line 3
+    return-void
+.end method

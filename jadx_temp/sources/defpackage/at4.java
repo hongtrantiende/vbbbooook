@@ -1,0 +1,17 @@
+package defpackage;
+
+import java.util.ArrayList;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* renamed from: at4  reason: default package */
+/* loaded from: classes3.dex */
+public final class at4 {
+    public ArrayList a;
+
+    public final int a(int i) {
+        return ((int[]) this.a.get(i / 768))[i % 768];
+    }
+
+    public final void b(int i, int i2) {
+        ((int[]) this.a.get(i / 768))[i % 768] = i2;
+    }
+}

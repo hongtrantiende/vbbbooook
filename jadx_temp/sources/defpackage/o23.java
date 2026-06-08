@@ -1,0 +1,8 @@
+package defpackage;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* renamed from: o23  reason: default package */
+/* loaded from: classes3.dex */
+public abstract class o23 {
+    public static final bp2 a = bp2.d;
+    public static final mxb b = mxb.c;
+}

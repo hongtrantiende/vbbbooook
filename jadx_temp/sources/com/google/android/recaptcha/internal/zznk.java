@@ -1,0 +1,13 @@
+package com.google.android.recaptcha.internal;
+
+import java.util.List;
+import java.util.RandomAccess;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* loaded from: classes.dex */
+public interface zznk extends List, RandomAccess {
+    void zzb();
+
+    boolean zzc();
+
+    zznk zzd(int i);
+}

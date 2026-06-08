@@ -1,0 +1,13 @@
+package defpackage;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* renamed from: cv  reason: default package */
+/* loaded from: classes.dex */
+public final class cv {
+    public final nv a;
+    public final oxc b;
+
+    public cv(nv nvVar) {
+        this.a = nvVar;
+        this.b = new oxc(nvVar);
+    }
+}

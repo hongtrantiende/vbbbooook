@@ -1,0 +1,138 @@
+package defpackage;
+
+import java.io.File;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* renamed from: t27  reason: default package */
+/* loaded from: classes3.dex */
+public final /* synthetic */ class t27 implements aj4 {
+    public final /* synthetic */ int a;
+    public final /* synthetic */ aj4 b;
+
+    public /* synthetic */ t27(int i, aj4 aj4Var) {
+        this.a = i;
+        this.b = aj4Var;
+    }
+
+    @Override // defpackage.aj4
+    public final Object invoke() {
+        int i = this.a;
+        float f = 1.0f;
+        float f2 = ged.e;
+        yxb yxbVar = yxb.a;
+        aj4 aj4Var = this.b;
+        switch (i) {
+            case 0:
+                aj4Var.invoke();
+                return yxbVar;
+            case 1:
+                aj4Var.invoke();
+                return yxbVar;
+            case 2:
+                aj4Var.invoke();
+                return yxbVar;
+            case 3:
+                aj4Var.invoke();
+                return yxbVar;
+            case 4:
+                aj4Var.invoke();
+                return yxbVar;
+            case 5:
+                aj4Var.invoke();
+                return yxbVar;
+            case 6:
+                aj4Var.invoke();
+                return yxbVar;
+            case 7:
+                aj4Var.invoke();
+                return yxbVar;
+            case 8:
+                aj4Var.invoke();
+                return yxbVar;
+            case 9:
+                aj4Var.invoke();
+                return yxbVar;
+            case 10:
+                aj4Var.invoke();
+                return yxbVar;
+            case 11:
+                aj4Var.invoke();
+                return yxbVar;
+            case 12:
+                aj4Var.invoke();
+                return yxbVar;
+            case 13:
+                File file = (File) aj4Var.invoke();
+                file.getClass();
+                String name = file.getName();
+                name.getClass();
+                if (lba.C0('.', name, "").equals("preferences_pb")) {
+                    File absoluteFile = file.getAbsoluteFile();
+                    absoluteFile.getClass();
+                    return absoluteFile;
+                }
+                jh1.h(file, " does not match required extension for Preferences file: preferences_pb", "File extension for file: ");
+                return null;
+            case 14:
+                float floatValue = ((Number) aj4Var.invoke()).floatValue();
+                if (floatValue >= ged.e) {
+                    f2 = floatValue;
+                }
+                if (f2 <= 1.0f) {
+                    f = f2;
+                }
+                return Float.valueOf(f);
+            case 15:
+                float floatValue2 = ((Number) aj4Var.invoke()).floatValue();
+                if (floatValue2 >= ged.e) {
+                    f2 = floatValue2;
+                }
+                if (f2 <= 1.0f) {
+                    f = f2;
+                }
+                return Float.valueOf(f);
+            case 16:
+                aj4Var.invoke();
+                return yxbVar;
+            case 17:
+                aj4Var.invoke();
+                return yxbVar;
+            case 18:
+                aj4Var.invoke();
+                return yxbVar;
+            case 19:
+                Boolean bool = (Boolean) aj4Var.invoke();
+                bool.booleanValue();
+                return bool;
+            case 20:
+                aj4Var.invoke();
+                return yxbVar;
+            case 21:
+                aj4Var.invoke();
+                return yxbVar;
+            case 22:
+                aj4Var.invoke();
+                return yxbVar;
+            case 23:
+                aj4Var.invoke();
+                return yxbVar;
+            case 24:
+                aj4Var.invoke();
+                return yxbVar;
+            case 25:
+                aj4Var.invoke();
+                return yxbVar;
+            case 26:
+                aj4Var.invoke();
+                return yxbVar;
+            case 27:
+                aj4Var.invoke();
+                return yxbVar;
+            case 28:
+                aj4Var.invoke();
+                return yxbVar;
+            default:
+                aj4Var.invoke();
+                return yxbVar;
+        }
+    }
+}

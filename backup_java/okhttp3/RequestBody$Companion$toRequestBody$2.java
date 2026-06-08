@@ -1,0 +1,28 @@
+package okhttp3;
+
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* loaded from: classes3.dex */
+public final class RequestBody$Companion$toRequestBody$2 extends RequestBody {
+    @Override // okhttp3.RequestBody
+    public final MediaType b() {
+        return null;
+    }
+
+    @Override // okhttp3.RequestBody
+    public final boolean d() {
+        return true;
+    }
+
+    @Override // okhttp3.RequestBody
+    public final void e(uu0 uu0Var) {
+        uu0Var.getClass();
+        FileInputStream fileInputStream = new FileInputStream((FileDescriptor) null);
+        try {
+            uu0Var.b().K(mq0.B(fileInputStream));
+            fileInputStream.close();
+        } finally {
+        }
+    }
+}

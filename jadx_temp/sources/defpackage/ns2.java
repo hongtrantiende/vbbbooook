@@ -1,0 +1,48 @@
+package defpackage;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* renamed from: ns2  reason: default package */
+/* loaded from: classes3.dex */
+public final class ns2 implements khc {
+    public final /* synthetic */ khc a;
+
+    public ns2(f15 f15Var, khc khcVar) {
+        f15Var.getClass();
+        khcVar.getClass();
+        this.a = khcVar;
+    }
+
+    @Override // defpackage.khc
+    public final f51 D() {
+        return this.a.D();
+    }
+
+    @Override // defpackage.khc
+    public final void M0(long j) {
+        this.a.M0(j);
+    }
+
+    @Override // defpackage.khc
+    public final Object P(lhc lhcVar) {
+        return this.a.P(lhcVar);
+    }
+
+    @Override // defpackage.khc
+    public final Object T(fi4 fi4Var, qx1 qx1Var) {
+        return this.a.T(fi4Var, qx1Var);
+    }
+
+    @Override // defpackage.khc
+    public final long U0() {
+        return this.a.U0();
+    }
+
+    @Override // defpackage.khc
+    public final qh9 g0() {
+        return this.a.g0();
+    }
+
+    @Override // defpackage.t12
+    public final k12 r() {
+        return this.a.r();
+    }
+}

@@ -1,0 +1,12 @@
+package okhttp3.internal.http;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* loaded from: classes3.dex */
+public final class HttpMethod {
+    public static final boolean a(String str) {
+        str.getClass();
+        if (!str.equals("GET") && !str.equals("HEAD")) {
+            return true;
+        }
+        return false;
+    }
+}

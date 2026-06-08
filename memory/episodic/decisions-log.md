@@ -112,3 +112,72 @@ Chọn **phương án 3**. Sử dụng JADX để bóc tách APK ra thư mục `
 - ✅ Dễ đọc code Java, xem được kiến trúc tổng thể, dễ tìm kiếm.
 - ✅ Có thể lợi dụng Android Studio để index, refactor và trace bug.
 - ⚠️ JADX không hoàn hảo, mã Java sinh ra chắc chắn có hàng loạt lỗi cú pháp. Người dùng phải dành thời gian đáng kể để fix code trước khi có thể build thành công.
+
+---
+
+### ADR-005: Xóa bỏ mã nguồn thư viện rác do JADX sinh ra
+
+**Date:** 2026-06-08
+**Status:** Accepted
+
+**Context:** 
+Khi sử dụng JADX để dịch ngược ứng dụng ra mã nguồn Java (`--export-gradle`), JADX đã bóc tách toàn bộ các thư viện bên thứ ba (như Google IMA SDK, Firebase, Ktor, Kotlin Coroutines...) và lưu chúng dưới dạng mã nguồn thô trong thư mục `src/main/java`. Việc để trình biên dịch Android Studio build lại các thư viện khổng lồ này dẫn đến hơn 10,000 lỗi cú pháp Java (Syntax Errors) không đáng có do chất lượng code dịch ngược kém.
+
+**Options Considered:**
+1. **Sửa lỗi thủ công từng file thư viện** — Bất khả thi, mất quá nhiều thời gian và làm hỏng logic gốc của thư viện.
+2. **Xóa toàn bộ mã nguồn thư viện và dùng Gradle Dependencies** — Khôi phục lại sự trong sạch cho dự án, chỉ giữ lại logic cốt lõi của Vbook (`com/reader`, `com/vbook`).
+
+**Decision:**
+Chọn **phương án 2**. Xóa sạch các thư mục `com/google`, `io`, `org`, `j$`, `nl`, `baidu`, `defpackage`, `com/highcapable`, `com/k2fsa`. Thay vào đó, khai báo lại các thư viện này thông qua tệp `build.gradle` để sử dụng bản pre-compiled AAR chính thức.
+
+**Consequences:**
+- ✅ Cắt giảm 99% lượng lỗi cú pháp Java khi build.
+- ✅ Dự án gọn nhẹ hơn, thời gian biên dịch nhanh hơn.
+- ⚠️ Phải dò lại những thư viện nào bị thiếu (Missing Classes) trong quá trình sửa lỗi code Vbook để bổ sung vào `build.gradle` dần dần.
+
+---
+
+### ADR-006: Hủy bỏ việc biên dịch Java bằng Android Studio, trở về Apktool (Smali) do mã bị Obfuscate
+
+**Date:** 2026-06-08
+**Status:** Accepted
+**Replaces:** Một phần của ADR-004
+
+**Context:** 
+Sau khi dọn dẹp các thư viện bên thứ 3 trong dự án do JADX sinh ra, trình biên dịch báo thiếu các class như `gn1`, `xt5`, `ig5`. Phân tích sâu hơn cho thấy ứng dụng Vbook nguyên bản đã bị làm rối mã (Obfuscate) bằng ProGuard/R8. Các class của thư viện và AndroidX đã bị đổi tên, do đó mã nguồn Java do JADX sinh ra đã bị "khóa chặt" vào các tên giả mạo này. Việc biên dịch lại bằng Android Studio là bất khả thi vì không thể phục hồi tên gốc cho hàng ngàn class.
+
+**Options Considered:**
+1. **De-obfuscate mã nguồn thủ công** — Tốn hàng tháng trời và tỷ lệ thành công thấp.
+2. **Biên dịch lại toàn bộ các thư viện lỗi của JADX** — Cần sửa hàng chục ngàn lỗi cú pháp, bất khả thi.
+3. **Quay lại sử dụng Apktool và thao tác trên Smali** — Smali không bị ảnh hưởng bởi Obfuscation vì nó làm việc ở mức bytecode/hợp ngữ. Dùng JADX (Android Studio) chỉ để ĐỌC mã Java và tìm vị trí cần sửa, sau đó sửa vào file `.smali` tương ứng.
+
+**Decision:**
+Chọn **phương án 3**. Hủy bỏ hoàn toàn nỗ lực build Gradle trên thư mục `vBook_AndroidStudio`. Chuyển trọng tâm trở lại thư mục `vBook_decompiled` của Apktool. Áp dụng các phương pháp sửa lỗi AAPT2 đã tìm ra (xóa `public.xml`, fix lỗi color widget) vào thư mục Apktool để hoàn thành việc Rebuild APK.
+
+**Consequences:**
+- ✅ Chắc chắn sẽ Rebuild thành công APK vì Apktool không quan tâm đến mã Java bị rối.
+- ✅ Giữ lại được thư mục JADX làm "bản đồ" tham chiếu logic hoàn hảo.
+- ➖ Việc thêm tính năng hoặc sửa logic phải thực hiện trên ngôn ngữ Smali, khó khăn hơn so với Java.
+
+---
+
+### ADR-007: Xóa các nút Đăng nhập và Cộng đồng bằng cách can thiệp vào UI rendering
+
+**Date:** 2026-06-08
+**Status:** Accepted
+
+**Context:** 
+Người dùng muốn loại bỏ tính năng Đăng nhập và Cộng đồng để sử dụng ứng dụng như một phiên bản offline hoàn toàn ("không cần đăng nhập vẫn xài được"). Ứng dụng gốc có một ngăn kéo (Drawer) hiển thị nút Đăng nhập/Đăng ký khi chưa đăng nhập, và hiển thị tab Cộng đồng khi đã đăng nhập.
+
+**Options Considered:**
+1. **Chỉnh sửa State (s2c)** - Ép `isLogin` luôn bằng `true` hoặc `false`. Nhược điểm: có thể gây lỗi Crash nếu ứng dụng cố gọi API với Token null, và không thể loại bỏ hoàn toàn các tab không mong muốn.
+2. **Chỉnh sửa luồng Navigation (o71)** - Thay đổi Route Provider trả về Null. Nhược điểm: Các nút bấm trên giao diện vẫn tồn tại, khi bấm vào có thể gây crash do thiếu Route.
+3. **Comment out mã UI Rendering trong `se0.smali`** - Xóa các lệnh gọi `Lse0;->f` (render item) và `Lqxd;->b` (render nút Đăng ký/Đăng nhập) trong hàm xây dựng Drawer `se0.j`.
+
+**Decision:**
+Chọn **phương án 3**. Thực hiện Comment Out (`#`) các lời gọi hàm dựng UI trong `se0.smali` để ẩn hoàn toàn các tính năng này khỏi mắt người dùng mà không làm hỏng logic định tuyến hoặc State bên dưới.
+
+**Consequences:**
+- ✅ Giao diện ứng dụng hoàn toàn sạch sẽ, không còn các nút Đăng nhập/Đăng ký/Đồng bộ/Cộng đồng.
+- ✅ Tránh rủi ro crash do NPE hoặc do thay đổi State giả mạo.
+- ➖ Tên ứng dụng/Logo ở Header vẫn click được nhưng do không có nút đăng nhập nào khác nên không gây ảnh hưởng lớn.

@@ -1,0 +1,172 @@
+package defpackage;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.text.TextUtils;
+import java.util.ArrayList;
+import java.util.List;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* renamed from: v6e  reason: default package */
+/* loaded from: classes.dex */
+public final class v6e extends l3 {
+    public static final Parcelable.Creator<v6e> CREATOR = new cnd(21);
+    public final String B;
+    public final boolean C;
+    public final boolean D;
+    public final long E;
+    public final String F;
+    public final long G;
+    public final int H;
+    public final boolean I;
+    public final boolean J;
+    public final Boolean K;
+    public final long L;
+    public final List M;
+    public final String N;
+    public final String O;
+    public final String P;
+    public final boolean Q;
+    public final long R;
+    public final int S;
+    public final String T;
+    public final int U;
+    public final long V;
+    public final String W;
+    public final String X;
+    public final long Y;
+    public final int Z;
+    public final String a;
+    public final long a0;
+    public final String b;
+    public final String c;
+    public final String d;
+    public final long e;
+    public final long f;
+
+    public v6e(String str, String str2, String str3, long j, String str4, long j2, long j3, String str5, boolean z, boolean z2, String str6, long j4, int i, boolean z3, boolean z4, Boolean bool, long j5, List list, String str7, String str8, String str9, boolean z5, long j6, int i2, String str10, int i3, long j7, String str11, String str12, long j8, int i4, long j9) {
+        ivc.o(str);
+        this.a = str;
+        this.b = true == TextUtils.isEmpty(str2) ? null : str2;
+        this.c = str3;
+        this.E = j;
+        this.d = str4;
+        this.e = j2;
+        this.f = j3;
+        this.B = str5;
+        this.C = z;
+        this.D = z2;
+        this.F = str6;
+        this.G = j4;
+        this.H = i;
+        this.I = z3;
+        this.J = z4;
+        this.K = bool;
+        this.L = j5;
+        this.M = list;
+        this.N = str7;
+        this.O = str8;
+        this.P = str9;
+        this.Q = z5;
+        this.R = j6;
+        this.S = i2;
+        this.T = str10;
+        this.U = i3;
+        this.V = j7;
+        this.W = str11;
+        this.X = str12;
+        this.Y = j8;
+        this.Z = i4;
+        this.a0 = j9;
+    }
+
+    @Override // android.os.Parcelable
+    public final void writeToParcel(Parcel parcel, int i) {
+        int V = uk1.V(parcel, 20293);
+        uk1.Q(parcel, 2, this.a);
+        uk1.Q(parcel, 3, this.b);
+        uk1.Q(parcel, 4, this.c);
+        uk1.Q(parcel, 5, this.d);
+        uk1.U(parcel, 6, 8);
+        parcel.writeLong(this.e);
+        uk1.U(parcel, 7, 8);
+        parcel.writeLong(this.f);
+        uk1.Q(parcel, 8, this.B);
+        uk1.U(parcel, 9, 4);
+        parcel.writeInt(this.C ? 1 : 0);
+        uk1.U(parcel, 10, 4);
+        parcel.writeInt(this.D ? 1 : 0);
+        uk1.U(parcel, 11, 8);
+        parcel.writeLong(this.E);
+        uk1.Q(parcel, 12, this.F);
+        uk1.U(parcel, 14, 8);
+        parcel.writeLong(this.G);
+        uk1.U(parcel, 15, 4);
+        parcel.writeInt(this.H);
+        uk1.U(parcel, 16, 4);
+        parcel.writeInt(this.I ? 1 : 0);
+        uk1.U(parcel, 18, 4);
+        parcel.writeInt(this.J ? 1 : 0);
+        uk1.H(parcel, 21, this.K);
+        uk1.U(parcel, 22, 8);
+        parcel.writeLong(this.L);
+        uk1.R(parcel, 23, this.M);
+        uk1.Q(parcel, 25, this.N);
+        uk1.Q(parcel, 26, this.O);
+        uk1.Q(parcel, 27, this.P);
+        uk1.U(parcel, 28, 4);
+        parcel.writeInt(this.Q ? 1 : 0);
+        uk1.U(parcel, 29, 8);
+        parcel.writeLong(this.R);
+        uk1.U(parcel, 30, 4);
+        parcel.writeInt(this.S);
+        uk1.Q(parcel, 31, this.T);
+        uk1.U(parcel, 32, 4);
+        parcel.writeInt(this.U);
+        uk1.U(parcel, 34, 8);
+        parcel.writeLong(this.V);
+        uk1.Q(parcel, 35, this.W);
+        uk1.Q(parcel, 36, this.X);
+        uk1.U(parcel, 37, 8);
+        parcel.writeLong(this.Y);
+        uk1.U(parcel, 38, 4);
+        parcel.writeInt(this.Z);
+        uk1.U(parcel, 39, 8);
+        parcel.writeLong(this.a0);
+        uk1.W(parcel, V);
+    }
+
+    public v6e(String str, String str2, String str3, String str4, long j, long j2, String str5, boolean z, boolean z2, long j3, String str6, long j4, int i, boolean z3, boolean z4, Boolean bool, long j5, ArrayList arrayList, String str7, String str8, String str9, boolean z5, long j6, int i2, String str10, int i3, long j7, String str11, String str12, long j8, int i4, long j9) {
+        this.a = str;
+        this.b = str2;
+        this.c = str3;
+        this.E = j3;
+        this.d = str4;
+        this.e = j;
+        this.f = j2;
+        this.B = str5;
+        this.C = z;
+        this.D = z2;
+        this.F = str6;
+        this.G = j4;
+        this.H = i;
+        this.I = z3;
+        this.J = z4;
+        this.K = bool;
+        this.L = j5;
+        this.M = arrayList;
+        this.N = str7;
+        this.O = str8;
+        this.P = str9;
+        this.Q = z5;
+        this.R = j6;
+        this.S = i2;
+        this.T = str10;
+        this.U = i3;
+        this.V = j7;
+        this.W = str11;
+        this.X = str12;
+        this.Y = j8;
+        this.Z = i4;
+        this.a0 = j9;
+    }
+}

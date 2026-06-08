@@ -1,0 +1,14 @@
+package org.chromium.support_lib_boundary;
+
+import java.io.OutputStream;
+import java.util.Collection;
+import java.util.concurrent.Executor;
+/* compiled from: r8-map-id-4d6d8fcf5aedffa2274f080361e1b4e46b63437b827bc423e1864d8796e13b50 */
+/* loaded from: classes3.dex */
+public interface TracingControllerBoundaryInterface {
+    boolean isTracing();
+
+    void start(int i, Collection<String> collection, int i2);
+
+    boolean stop(OutputStream outputStream, Executor executor);
+}

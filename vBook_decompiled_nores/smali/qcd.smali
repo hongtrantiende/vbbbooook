@@ -16734,7 +16734,7 @@
     .line 609
     .line 610
     .line 611
-    if-eqz p2, :cond_10
+    goto :cond_10
 
     .line 612
     .line 613
@@ -17551,8 +17551,10 @@
     const/high16 v12, 0x3f800000    # 1.0f
 
     .line 253
+    goto :cond_c
+
     .line 254
-    if-eqz v2, :cond_c
+    const v13, 0xfc180a1
 
     .line 255
     .line 256

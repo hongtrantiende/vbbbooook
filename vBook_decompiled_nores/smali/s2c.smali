@@ -29,7 +29,7 @@
 
 # direct methods
 .method public constructor <init>(ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ZILjava/lang/String;ZII)V
-    .locals 0
+    .locals 1
 
     .line 1
     invoke-virtual {p5}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
@@ -39,10 +39,12 @@
     .line 4
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
+    const/4 v0, 0x1
+
     .line 5
     .line 6
     .line 7
-    iput-boolean p1, p0, Ls2c;->a:Z
+    iput-boolean v0, p0, Ls2c;->a:Z
 
     .line 8
     .line 9
@@ -62,7 +64,7 @@
 
     .line 16
     .line 17
-    iput-boolean p6, p0, Ls2c;->f:Z
+    iput-boolean v0, p0, Ls2c;->f:Z
 
     .line 18
     .line 19
@@ -74,7 +76,7 @@
 
     .line 22
     .line 23
-    iput-boolean p9, p0, Ls2c;->i:Z
+    iput-boolean v0, p0, Ls2c;->i:Z
 
     .line 24
     .line 25

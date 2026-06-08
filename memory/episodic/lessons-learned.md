@@ -64,3 +64,17 @@
   2. Tối ưu hóa file nén bằng `zipalign -v 4 input.apk output.apk` trước khi ký.
   3. Ký APK đã align bằng `apksigner sign --ks keystore.jks --ks-key-alias alias_name output.apk`.
 **Action:** Đưa quy trình 3 bước này làm luồng chuẩn trong file kỹ năng `skills/apk-tools/SKILL.md`.
+
+---
+
+### [2026-06-08] SMALI PATCH 🟡 Important — Bypass Premium check khi xuất Ebook và ép tự động gộp file TXT
+
+**Context:** Người dùng muốn xuất ebook (định dạng TXT) được gộp chung thành một file duy nhất và không yêu cầu tài khoản Premium để thực hiện.
+**Problem:**
+1. Logic kiểm tra Premium nằm trong file bytecode ẩn danh `f91.smali`, nếu `s2c.f:Z` (isPremium) là false sẽ ném dialog lỗi Premium.
+2. Cấu hình gộp file TXT nằm ở trường `g` của class `js3` (`ExportBookConfig`), tuy nhiên UI có thể không hoạt động hoặc reset cấu hình này về false.
+**Solution/Lesson:**
+- Patch class `f91.smali` tại case `:pswitch_6` để vô hiệu hóa lệnh nhảy điều kiện `if-eqz v1, :cond_b`, giúp luôn thực thi luồng xuất ebook.
+- Patch class `js3.smali` trong constructor để gán cứng `const/4 p7, 0x1` trước khi ghi vào trường `this->g:Z` (`mergeIntoSingleFile`), ép luôn luôn gộp các chương sách thành một file duy nhất.
+- Khi cài đặt bản vá mới lên Android, nếu signature khác hoặc cache lưu trạng thái cũ, cần gỡ cài đặt (uninstall) hoàn toàn app cũ trên điện thoại trước khi cài lại file APK mới.
+**Action:** Đã chỉnh sửa `f91.smali`, `js3.smali`, rebuild APK thành công và bàn giao cho người dùng.

@@ -1314,7 +1314,7 @@
 
     .line 566
     .line 567
-    if-eqz v1, :cond_b
+    # if-eqz v1, :cond_b
 
     .line 568
     .line 569

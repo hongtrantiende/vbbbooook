@@ -61,6 +61,8 @@
 
     .line 15
     .line 16
+    const/4 p7, 0x1
+
     iput-boolean p7, p0, Ljs3;->g:Z
 
     .line 17

@@ -20,6 +20,17 @@
 
 ## Entries
 
+### [2026-06-08] SMALI PATCH 🟡 Important — Khắc phục lỗi sót nút đăng nhập và ẩn tab động Bottom Navigation trong Jetpack Compose Multiplatform
+
+**Context:** Trong ứng dụng Compose Multiplatform được làm rối mã (Obfuscated), các nút đăng nhập có thể rải rác ở nhiều nơi (Drawer, Header, Settings), và thanh Bottom Navigation có thể hiển thị động dựa trên State của người dùng.
+**Problem:** Nếu chỉ comment out UI ở một vài nơi (như Drawer), người dùng vẫn có thể click vào các nút đăng nhập ở nơi khác. Ngoài ra, việc thay đổi state có thể làm hiển thị tab Cộng đồng.
+**Solution/Lesson:**
+- Patch constructor của class UserState (`s2c.smali`) để ép các trường boolean trạng thái như `isLogin`, `isPremium`, và `verified` luôn trả về `true` (sử dụng chỉ thị `const/4 v0, 0x1` và gán vào các trường tương ứng).
+- Để ẩn tab Cộng đồng một cách triệt để trên thanh điều hướng dưới, hãy tìm các phương thức dựng Bottom Navigation (trong `qcd.smali`, phương thức `g` cho landscape và `h` cho portrait), sau đó đổi chỉ thị kiểm tra điều kiện `if-eqz` thành `goto` vô điều kiện để luôn nhảy sang nhánh `else` (không vẽ tab Cộng đồng).
+**Action:** Đã chỉnh sửa `s2c.smali` và `qcd.smali`, rebuild, và cài đặt thành công APK hoàn chỉnh.
+
+---
+
 ### [2026-06-08] GIT 🟡 Important — Khắc phục lỗi RPC failed (Connection reset) khi push repo lớn chứa mã nguồn JADX lên GitHub
 
 **Context:** Sau khi dịch ngược mã nguồn bằng JADX, thư mục `jadx_temp/` chứa hàng chục ngàn file mã nguồn Java nhỏ được đưa vào git track.

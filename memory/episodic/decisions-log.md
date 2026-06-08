@@ -181,3 +181,26 @@ Chọn **phương án 3**. Thực hiện Comment Out (`#`) các lời gọi hàm
 - ✅ Giao diện ứng dụng hoàn toàn sạch sẽ, không còn các nút Đăng nhập/Đăng ký/Đồng bộ/Cộng đồng.
 - ✅ Tránh rủi ro crash do NPE hoặc do thay đổi State giả mạo.
 - ➖ Tên ứng dụng/Logo ở Header vẫn click được nhưng do không có nút đăng nhập nào khác nên không gây ảnh hưởng lớn.
+
+---
+
+### ADR-008: Ép trạng thái đăng nhập UserState (isLogin = true) và ẩn tab Cộng đồng bằng bytecode patch (qcd.smali)
+
+**Date:** 2026-06-08
+**Status:** Accepted
+**Replaces:** Một phần của ADR-007
+
+**Context:** 
+Mặc dù ở ADR-007 ta đã ẩn các nút Đăng nhập / Cộng đồng trong Drawer, nhưng người dùng vẫn có thể bấm vào các nút Đăng nhập ở các nơi khác trên UI, và tab Cộng đồng vẫn xuất hiện trên thanh Bottom Navigation vì trạng thái UserState mặc định là chưa đăng nhập. Ta cần ẩn hoàn toàn tab Cộng đồng và bypass triệt để các màn hình bắt buộc đăng nhập mà không gây crash.
+
+**Options Considered:**
+1. **Chỉ ẩn tab Cộng đồng và giữ nguyên UserState** - Giao diện Bottom Navigation sẽ sạch, nhưng người dùng vẫn sẽ gặp popup đăng nhập ở một số tính năng yêu cầu tài khoản.
+2. **Ép UserState `isLogin` luôn bằng `true` và ẩn tab Cộng đồng qua Bytecode Patch** - Patch constructor của `s2c.smali` để `isLogin = true`, `isPremium = true`, và `verified = true`. Đồng thời, đổi chỉ thị rẽ nhánh `if-eqz` thành `goto` trong `qcd.smali` (phương thức `g` và `h`) để bỏ qua hoàn toàn việc vẽ tab Cộng đồng trên Bottom Navigation.
+
+**Decision:**
+Chọn **phương án 2**. Đây là giải pháp triệt để nhất giúp biến ứng dụng thành phiên bản offline hoàn toàn, tự động kích hoạt tính năng Premium (nếu có) và ẩn hoàn toàn tab Cộng đồng trên mọi giao diện điều hướng (cả màn hình dọc và màn hình ngang) một cách an toàn.
+
+**Consequences:**
+- ✅ Người dùng hoàn toàn không thấy tab Cộng đồng trên Bottom Navigation.
+- ✅ Bypass hoàn toàn mọi màn hình bắt buộc đăng nhập (app tự nhận diện trạng thái đã đăng nhập Premium verified).
+- ✅ Khắc phục hoàn toàn lỗi sót nút đăng nhập từ các vị trí khác trên giao diện.

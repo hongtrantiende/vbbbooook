@@ -39,8 +39,12 @@ build/
 *.keystore
 *.jks
 /decompiled/
+*_decompiled/
 /dist-apk/
 /out-apk/
+
+# Local Tools
+/tools/
 
 # Local/Agent Cache
 .gemini/

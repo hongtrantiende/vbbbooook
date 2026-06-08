@@ -89,3 +89,16 @@
 - Vấn đề nằm ngoài tầm kiểm soát của ứng dụng (không liên quan đến code smali). Không thể fix bằng cách sửa code app vì hệ điều hành không có activity nào để hứng intent này.
 - Cách xử lý duy nhất là cài đặt/bật lại ứng dụng `DocumentsUI` trên thiết bị thông qua lệnh ADB: `cmd package install-existing --user 0 com.google.android.documentsui`.
 **Action:** Đã chạy lệnh khôi phục package `documentsui` cho `User 0` qua ADB, giúp tính năng xuất file hoạt động trở lại bình thường.
+
+---
+
+### [2026-06-08] APK TOOL 🟡 Important — Lỗi mất icon ứng dụng khi cài đặt hoặc xem trong Trình quản lý tệp
+
+**Context:** Sau khi patch APK và dùng `apktool b` để rebuild, ứng dụng không hiển thị icon đúng (bị biến thành logo Android mặc định) trên màn hình chính MIUI hoặc khi xem file APK trong File Manager.
+**Problem:** 
+1. MIUI Launcher thường cache icon theo signature. Nếu cài bản mod có signature khác bản gốc, nó sẽ hiện icon mặc định. Cần khởi động lại Launcher (`am force-stop com.miui.home`) hoặc clear cache.
+2. Trình quản lý tệp tin (File Manager) không trích xuất được icon từ file APK nếu ứng dụng bị decompile bằng cờ `-r` (giữ nguyên resources.arsc binary) trong khi dùng App Bundle. File Manager không thể đọc được các icon dạng Adaptive Icon (`.xml`) hoặc WebP (`.webp`) nếu `resources.arsc` bị nén lệch hoặc tên file bị obfuscate (VD: `-6.webp`).
+**Solution/Lesson:**
+- Để đảm bảo file APK hiển thị đúng icon trong File Manager, KHÔNG dùng cờ `-r` khi decompile nếu muốn can thiệp icon. Phải decompile full (`apktool d -f`), fix các lỗi AAPT2 (nếu có, VD xóa các attribute không tồn tại như `glance_isTopLevelLayout` bằng regex), sau đó rebuild bằng `apktool b`.
+- Ký APK bằng Release Keystore (`apksigner sign --ks release.keystore`) thay vì Debug Keystore để tránh bị các hệ điều hành như MIUI đánh dấu là app thử nghiệm và cố tình ẩn icon.
+**Action:** Đã decompile full, dùng PowerShell xóa lỗi AAPT2 trong `res/layout`, rebuild và ký bằng Release key. Icon hiển thị thành công trong File Manager.

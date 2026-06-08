@@ -102,3 +102,14 @@
 - Để đảm bảo file APK hiển thị đúng icon trong File Manager, KHÔNG dùng cờ `-r` khi decompile nếu muốn can thiệp icon. Phải decompile full (`apktool d -f`), fix các lỗi AAPT2 (nếu có, VD xóa các attribute không tồn tại như `glance_isTopLevelLayout` bằng regex), sau đó rebuild bằng `apktool b`.
 - Ký APK bằng Release Keystore (`apksigner sign --ks release.keystore`) thay vì Debug Keystore để tránh bị các hệ điều hành như MIUI đánh dấu là app thử nghiệm và cố tình ẩn icon.
 **Action:** Đã decompile full, dùng PowerShell xóa lỗi AAPT2 trong `res/layout`, rebuild và ký bằng Release key. Icon hiển thị thành công trong File Manager.
+
+---
+
+### [2026-06-08] APK TOOL 🔴 Critical — Lỗi mất bản vá (patch) do Apktool dùng lại cache cũ (classes.dex)
+
+**Context:** Sau khi copy đè các file `.smali` đã patch (từ một thư mục khác) vào thư mục mã nguồn đang được làm việc (`vBook_res`), và chạy lệnh `apktool b`, file APK đầu ra bị mất toàn bộ tính năng hack (Premium, gộp file...).
+**Problem:** 
+Công cụ `apktool b` có cơ chế cache. Nếu thư mục `build/apk/classes.dex` đã tồn tại từ lần build trước, nó sẽ so sánh timestamp (thời gian sửa đổi) của các file `.smali`. Do các file `.smali` copy đè vào được sửa đổi từ trước (timestamp cũ hơn file `classes.dex` hiện tại), `apktool` lầm tưởng mã nguồn không thay đổi và **bỏ qua việc dịch lại Smali**. Kết quả là file APK dùng lại lõi code cũ chưa hack.
+**Solution/Lesson:**
+- **LUÔN LUÔN** xóa thư mục `build/` (hoặc chí ít là xóa các file `classes*.dex` trong `build/apk/`) trước khi chạy lệnh `apktool b` nếu có thao tác copy/paste đè file `.smali` từ nơi khác vào. Lệnh: `Remove-Item -Path <thư-mục-nguồn>/build -Recurse -Force`.
+**Action:** Đã xóa thư mục `build/`, chạy lại `apktool b`, code patch đã được build lại thành công vào APK.
